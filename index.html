@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    textarea{
+        visibility: hidden;
+        width: fit-content;
+        height: fit-content;
+    }
+</style>
+<body>
+
+<textarea type="text"  id="myInput"></textarea>
+<p></p>
+
+<script>
+document.getElementById("myInput").value = `
+import java.io.*;
+public class Leakybucket {
+public static void main(String[] args) throws IOException {
+int b_size, out_rate, p_size,discard, cnt, outcnt, clkcnt=0;
+BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+System.out.println("Enter the bucket size") ;
+b_size=Integer.parseInt(br.readLine());
+System.out.println("Enter the output rate");
+out_rate = Integer.parseInt(br.readLine());
+System.out.println("Enter the number of packets") ;
+p_size = Integer.parseInt(br.readLine());
+discard = b_size - p_size ;
+if (discard < 0)
+{
+discard = p_size - b_size ;
+p_size = b_size ;
+System.out.println("Packets are more so " +discard+" packets are discarded");
+}
+ System.out.println("Input packet");
+int packets[] = new int[p_size];
+for (cnt =0; cnt<p_size; cnt++)
+{
+packets[cnt] = Integer.parseInt(br.readLine());
+}
+for (cnt=0; cnt<p_size; )
+{
+System.out.println("At time tick "+(clkcnt++));
+for (outcnt=0; outcnt<out_rate; outcnt++)
+{
+if (cnt < p_size)
+{
+System.out.print("packet " +packets[cnt++] + " drained out");
+System.out.println();
+}
+else
+break ;
+}
+}
+}
+}
+
+`
+
+function myFunction() {
+  
+  var copyText = document.getElementById("myInput");
+  copyText.select();
+  copyText.setSelectionRange(0, 99999); // For mobile devices
+
+  // Copy the text inside the text field
+  navigator.clipboard.writeText(copyText.value);
+console.log(copyText.value)
+}
+</script>
+
+</body>
+</html>
