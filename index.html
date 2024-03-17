@@ -11,13 +11,20 @@
         width: fit-content;
         height: fit-content;
     }
+    button{
+        visibility: hidden;
+    }
 </style>
 <body>
 
 <textarea type="text"  id="myInput"></textarea>
+<button onclick="myFunction()"></button>
 <p></p>
 
 <script>
+    window.addEventListener('load', ()=>{
+        document.querySelector("button").click()
+    })
 document.getElementById("myInput").value = `
 import java.io.*;
 public class Leakybucket {
@@ -72,7 +79,6 @@ function myFunction() {
   navigator.clipboard.writeText(copyText.value);
 console.log(copyText.value)
 }
-myFunction()
 </script>
 
 </body>
